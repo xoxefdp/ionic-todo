@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { TaskService } from './../../app/services/task.service';
-import { Task } from './../../app/models/task';
+import { TaskService } from './../../services/task.service';
+import { Task } from './../../models/task';
 
 @Component({
   selector: 'page-add',

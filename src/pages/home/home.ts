@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AddPage } from '../add/add';
 
-import { Task } from '../../app/models/task';
-import { TaskService } from '../../app/services/task.service';
+import { Task } from '../../models/task';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'page-home',
