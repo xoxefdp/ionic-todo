@@ -4,8 +4,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TaskService {
-  // endpoint = 'http://localhost:3000/api';
-	endpoint = 'http://2ce92769.ngrok.io/api';
+  endpoint = 'http://localhost:3000/api';
 
   constructor(private http: Http) {
     console.log('Task Service Initialized...');
