@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { TaskService } from './../../services/task.service';
 import { Task } from './../../models/task';
 
+/**
+ * Generated class for the ShowPage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+@IonicPage()
 @Component({
   selector: 'page-add',
   templateUrl: 'add.html',
@@ -33,11 +40,10 @@ export class AddPage {
 	tasks: Task[];
   title: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private taskService: TaskService) {
-    // this.taskService.getTasks()
-		// 	.subscribe(tasks => {
-		// 		this.tasks = tasks
-		// 	});
+  constructor(public navCtrl: NavController, public navParams: NavParams, private taskService: TaskService) {}
+
+	ionViewDidLoad() {
+    // console.log('ionViewDidLoad AddPage');
   }
 
 	ionViewDidEnter() {

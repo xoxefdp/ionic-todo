@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AddPage } from '../add/add';
 
+import { AddPage } from '../add/add';
+import { ShowPage } from '../show/show';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
 
@@ -37,12 +38,11 @@ export class HomePage {
 	tasks: Task[];
 	title: string;
 
-	constructor(public navCtrl: NavController, private taskService: TaskService) {
-		// this.taskService.getTasks()
-		// 	.subscribe(tasks => {
-		// 		this.tasks = tasks;
-		// 	});
-	}
+	constructor(public navCtrl: NavController, private taskService: TaskService) {}
+
+	ionViewDidLoad() {
+    // console.log('ionViewDidLoad HomePage');
+  }
 
 	ionViewDidEnter() {
 		this.taskService.getTasks()
@@ -55,8 +55,11 @@ export class HomePage {
 		this.navCtrl.push(AddPage);
 	}
 
+	show(task: Task) {
+		this.navCtrl.push(ShowPage, task);
+	}
+
 	deleteTask(id: number) {
-		console.log(id);
 		const tasks = this.tasks;
 		this.taskService.deleteTask(id)
 			.subscribe(data => {

@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="todos">
+<ion-content padding>
 	<ion-list>
 		<!-- <ion-item *ngFor="let item of items; let i = index">
 			<h2>{{item}}</h2>
@@ -17,12 +17,13 @@
 			</ion-buttons>
 		</ion-item> -->
 		<ion-item-sliding *ngFor="let task of tasks">
-			<ion-item>
+			<button ion-item (click)="show(task)">
 				<h2>{{task.title}}</h2>
-			</ion-item>
+			</button>
 			<ion-item-options>
-				<button danger (click)="deleteTask(task._id)">
+				<button ion-button color="danger" (click)="deleteTask(task._id)">
 					<ion-icon name="trash"></ion-icon>
+					Delete
 				</button>
 			</ion-item-options>
 		</ion-item-sliding>

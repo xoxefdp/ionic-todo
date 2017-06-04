@@ -4,15 +4,21 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TaskService {
-  endpoint = 'http://localhost:3000/api';
+	endpoint = 'http://localhost:3000/api';
 
   constructor(private http: Http) {
-    console.log('Task Service Initialized...');
+    // console.log('Task Service Initialized...');
   }
 
   getTasks() {
     return this.http.get(
       this.endpoint + '/tasks')
+    .map(res => res.json());
+  }
+
+	getTask(id) {
+    return this.http.get(
+      this.endpoint + '/task/' + id)
     .map(res => res.json());
   }
 
@@ -29,6 +35,16 @@ export class TaskService {
   deleteTask(id) {
     return this.http.delete(
       this.endpoint + '/task/' + id)
+    .map(res => res.json());
+  }
+
+	updateStatus(task) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put(
+      this.endpoint + '/task/' + task._id,
+      JSON.stringify(task),
+      {headers: headers})
     .map(res => res.json());
   }
 

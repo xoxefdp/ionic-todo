@@ -8,12 +8,15 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AddPage } from '../pages/add/add';
+import { ShowPage } from '../pages/show/show';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-		AddPage
+		AddPage,
+		ShowPage
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,8 @@ import { AddPage } from '../pages/add/add';
   entryComponents: [
     MyApp,
     HomePage,
-		AddPage
+		AddPage,
+		ShowPage
   ],
   providers: [
     StatusBar,
