@@ -34,10 +34,10 @@ export class AddPage {
   title: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private taskService: TaskService) {
-    this.taskService.getTasks()
-			.subscribe(tasks => {
-				this.tasks = tasks
-			});
+    // this.taskService.getTasks()
+		// 	.subscribe(tasks => {
+		// 		this.tasks = tasks
+		// 	});
   }
 
 	ionViewDidEnter() {

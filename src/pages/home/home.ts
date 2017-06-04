@@ -38,10 +38,10 @@ export class HomePage {
 	title: string;
 
 	constructor(public navCtrl: NavController, private taskService: TaskService) {
-		this.taskService.getTasks()
-			.subscribe(tasks => {
-				this.tasks = tasks;
-			});
+		// this.taskService.getTasks()
+		// 	.subscribe(tasks => {
+		// 		this.tasks = tasks;
+		// 	});
 	}
 
 	ionViewDidEnter() {
