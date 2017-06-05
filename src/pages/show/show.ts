@@ -36,10 +36,6 @@ export class ShowPage {
 			});
 	}
 
-  ionViewDidLoad() {}
-
-	ionViewDidEnter() {}
-
 	updateStatus() {
 		const updTask = {
 			_id: this.task._id,

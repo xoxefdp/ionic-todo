@@ -47,10 +47,6 @@ export class AddPage {
 			});
 	}
 
-	ionViewDidLoad() {}
-
-	ionViewDidEnter() {}
-
   addTask() {
     const newTask = {
       title: this.title,

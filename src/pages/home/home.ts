@@ -45,9 +45,12 @@ export class HomePage {
 			});
 	}
 
-	ionViewDidLoad() {}
-
-	ionViewDidEnter() {}
+	ionViewWillEnter() {
+		this.taskService.getTasks()
+			.subscribe(tasks => {
+				this.tasks = tasks;
+			});
+	}
 
 	add() {
 		this.navCtrl.push(AddPage);
