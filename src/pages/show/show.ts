@@ -23,13 +23,7 @@ export class ShowPage {
 	title: string;
 	isDone: boolean;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private taskService: TaskService) {}
-
-  ionViewDidLoad() {
-    // console.log('ionViewDidLoad ShowPage');
-  }
-
-	ionViewDidEnter() {
+	constructor(public navCtrl: NavController, public navParams: NavParams, private taskService: TaskService) {
 		this.taskService.getTasks()
 			.subscribe(tasks => {
 				this.tasks = tasks;
@@ -41,6 +35,10 @@ export class ShowPage {
 				this.isDone = task.isDone;
 			});
 	}
+
+  ionViewDidLoad() {}
+
+	ionViewDidEnter() {}
 
 	updateStatus() {
 		const updTask = {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 import { TaskService } from './../../services/task.service';
 import { Task } from './../../models/task';
@@ -40,18 +40,16 @@ export class AddPage {
 	tasks: Task[];
   title: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private taskService: TaskService) {}
-
-	ionViewDidLoad() {
-    // console.log('ionViewDidLoad AddPage');
-  }
-
-	ionViewDidEnter() {
+  constructor(public navCtrl: NavController, private taskService: TaskService) {
 		this.taskService.getTasks()
 			.subscribe(tasks => {
 				this.tasks = tasks;
 			});
 	}
+
+	ionViewDidLoad() {}
+
+	ionViewDidEnter() {}
 
   addTask() {
     const newTask = {
