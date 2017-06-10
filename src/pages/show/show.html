@@ -13,11 +13,11 @@
 <ion-content padding>
 	<ion-list>
 		<ion-item>
-			<ion-input type="text" [(ngModel)]="title"></ion-input>
+			<ion-input type="text" [(ngModel)]="task.title"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label>Is Done?</ion-label>
-			<ion-checkbox color="blue" [(ngModel)]="isDone"></ion-checkbox>
+			<ion-checkbox color="blue" [(ngModel)]="task.isDone"></ion-checkbox>
 		</ion-item>
 
 		<button ion-button full (click)="updateStatus(task)">

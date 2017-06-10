@@ -36,42 +36,56 @@ export class HomePage {
 	// }
 
 	tasks: Task[];
-	title: string;
 
 	constructor(public navCtrl: NavController, private taskService: TaskService) {
 		this.taskService.getTasks()
 			.subscribe(tasks => {
 				this.tasks = tasks;
+
+				console.log(tasks);
 			});
 	}
 
 	ionViewWillEnter() {
-		this.taskService.getTasks()
-			.subscribe(tasks => {
-				this.tasks = tasks;
-			});
+		if( this.tasks.length == 0 ) {
+			this.taskService.getTasks()
+				.subscribe(tasks => {
+					this.tasks = tasks;
+
+					console.log(tasks);
+				});
+		} else {
+			console.log(this.tasks);
+		}
 	}
 
 	add() {
-		this.navCtrl.push(AddPage);
+		this.navCtrl.push(AddPage, {
+			tasks: this.tasks
+		});
 	}
 
 	show(task: Task) {
-		this.navCtrl.push(ShowPage, task);
+		this.navCtrl.push(ShowPage, {
+			task: task,
+			tasks: this.tasks
+		});
 	}
 
 	deleteTask(id: number) {
-		const tasks = this.tasks;
 		this.taskService.deleteTask(id)
 			.subscribe(data => {
 				if (data.n === 1) {
-					for (let i = 0; i < tasks.length; i++) {
-						if (tasks[i]._id === id) {
-							tasks.splice(i, 1);
+					for (let i = 0; i < this.tasks.length; i++) {
+						if (this.tasks[i]._id === id) {
+							this.tasks.splice(i, 1);
 						}
 					}
 				}
 			});
+
+		console.log(this.tasks);
+		console.log(id);
 	}
 
 }

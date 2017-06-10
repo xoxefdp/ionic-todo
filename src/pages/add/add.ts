@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { TaskService } from './../../services/task.service';
 import { Task } from './../../models/task';
@@ -40,11 +40,21 @@ export class AddPage {
 	tasks: Task[];
   title: string;
 
-  constructor(public navCtrl: NavController, private taskService: TaskService) {
-		this.taskService.getTasks()
-			.subscribe(tasks => {
-				this.tasks = tasks;
-			});
+  constructor(public navCtrl: NavController, public navParams: NavParams, private taskService: TaskService) {
+		// this.taskService.getTasks()
+		// 	.subscribe(tasks => {
+		// 		this.tasks = tasks;
+		// 	});
+
+		this.tasks = this.navParams.data.tasks;
+
+		console.log(this.tasks);
+	}
+
+	ionViewWillEnter() {
+		this.tasks = this.navParams.data.tasks;
+
+		console.log(this.tasks);
 	}
 
   addTask() {
@@ -52,12 +62,16 @@ export class AddPage {
       title: this.title,
       isDone: false
     }
+
     this.taskService.addTask(newTask)
       .subscribe(task => {
         this.tasks.push(task);
         this.title = '';
 				this.navCtrl.pop();
       });
+
+		console.log(this.tasks);
+		console.log(newTask);
   }
 
 }

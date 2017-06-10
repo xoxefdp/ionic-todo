@@ -7,7 +7,7 @@ export class TaskService {
 	endpoint = 'http://localhost:3000/api';
 
   constructor(private http: Http) {
-    // console.log('Task Service Initialized...');
+    console.log('Task Service Initialized...');
   }
 
   getTasks() {
