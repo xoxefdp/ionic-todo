@@ -41,17 +41,14 @@ export class HomePage {
 		this.taskService.getTasks()
 			.subscribe(tasks => {
 				this.tasks = tasks;
-
-				console.log(tasks);
 			});
 	}
 
 	ionViewWillEnter() {
-		if( this.tasks.length == 0 ) {
+		if( this.tasks == null || this.tasks.length == 0 ) {
 			this.taskService.getTasks()
 				.subscribe(tasks => {
 					this.tasks = tasks;
-
 					console.log(tasks);
 				});
 		} else {
@@ -83,9 +80,6 @@ export class HomePage {
 					}
 				}
 			});
-
-		console.log(this.tasks);
-		console.log(id);
 	}
 
 }
