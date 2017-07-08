@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 
-import { MyApp } from './app.component';
+import { App } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AddPage } from '../pages/add/add';
 import { ShowPage } from '../pages/show/show';
@@ -13,7 +13,7 @@ import { ShowPage } from '../pages/show/show';
 
 @NgModule({
   declarations: [
-    MyApp,
+    App,
     HomePage,
 		AddPage,
 		ShowPage
@@ -21,11 +21,11 @@ import { ShowPage } from '../pages/show/show';
   imports: [
     BrowserModule,
 		HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(App)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    App,
     HomePage,
 		AddPage,
 		ShowPage
