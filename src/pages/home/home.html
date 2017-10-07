@@ -1,36 +1,49 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-			TO-DO List!
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-item>
+			<ion-title>
+				<h2>Task List</h2>
+			</ion-title>
+		</ion-item>
+		<ion-list inset>
+			<ion-item>
+				<ion-icon name="search"></ion-icon>
+				<ion-input type="text" [(ngModel)]="q" (keyup)="filterTask($event)" placeholder="Search..."></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-input type="text" [(ngModel)]="title" (keydown)="addTask($event)" placeholder="Add Task..."></ion-input>
+			</ion-item>
+		</ion-list>
+	</ion-navbar>
 </ion-header>
 
-<ion-content padding>
-	<ion-list>
-		<!-- <ion-item *ngFor="let item of items; let i = index">
-			<h2>{{item}}</h2>
-			<ion-buttons end>
-				<button danger (click)="delete(i)">
-					<ion-icon name="trash"></ion-icon>
-				</button>
-			</ion-buttons>
-		</ion-item> -->
-		<ion-item-sliding *ngFor="let task of tasks">
-			<button ion-item (click)="show(task)">
-				<h2>{{task.title}}</h2>
+<ion-content>
+	<ion-list inset>
+		<ion-item *ngFor="let task of filteredTasks | slice: (currentPage * pageSize) - pageSize : currentPage * pageSize">
+			<ion-label>{{task.title}}</ion-label>
+			<ion-checkbox color="blue" [(ngModel)]="task.isDone" (click)="updateStatus(task)"></ion-checkbox>
+			<button ion-button item-end color="danger" (click)="deleteTask(task._id)">
+				<ion-icon name="trash"></ion-icon>
 			</button>
-			<ion-item-options>
-				<button ion-button color="danger" (click)="deleteTask(task._id)">
-					<ion-icon name="trash"></ion-icon>
-					Delete
-				</button>
-			</ion-item-options>
-		</ion-item-sliding>
-
-		<button ion-button full (click)="add()">
-			<ion-icon name="add-circle"></ion-icon>
-		</button>
-
+		</ion-item>
 	</ion-list>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col col-8>
+				<button ion-button (click)="previous()" [disabled]="currentPage == 1">
+					<ion-icon name="arrow-back"></ion-icon>
+				</button>
+				<button ion-button disabled>
+					{{currentPage}}/{{numberOfPages()}}
+				</button>
+				<button ion-button (click)="next()" [disabled]="currentPage >= numberOfPages()">
+					<ion-icon name="arrow-forward"></ion-icon>
+				</button>
+			</ion-col>
+			<ion-col col-4>
+				<ion-input type="number" [(ngModel)]="pageSize" placeholder="Rows per page..."></ion-input>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 </ion-content>
