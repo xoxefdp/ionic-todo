@@ -21,58 +21,28 @@ export class HomePage {
 	constructor(public navCtrl: NavController, private taskService: TaskService) {
 		this.tasks = [];
 		this.filteredTasks = [];
-		this.currentPage = 1;
-		this.pageSize = 4;
+		this.pageSize = 5;
 		this.q = '';
 
 		if( this.tasks == null || this.tasks.length == 0 ) {
-			this.init();
-		} else {
-			console.log(this.tasks);
-			console.log(this.filteredTasks);
+			this.getTasks();
 		}
 	}
 
 
-	init() {
+	ionViewWillEnter() {
+		if( this.tasks == null || this.tasks.length == 0 ) {
+			this.getTasks();
+		}
+	}
+
+	getTasks() {
 		this.taskService.getTasks()
 			.subscribe(tasks => {
 				this.tasks = tasks;
 				this.filteredTasks = this.tasks;
-				console.log(this.tasks);
-				console.log(this.filteredTasks);
+				this.currentPage = 1;
 			});
-	}
-
-	ionViewWillEnter() {
-		if( this.tasks == null || this.tasks.length == 0 ) {
-			this.init();
-		} else {
-			console.log(this.tasks);
-			console.log(this.filteredTasks);
-		}
-	}
-
-	filterTask() {
-		if(this.q){
-			this.assignCopy();
-		}
-		this.filteredTasks = Object.assign([], this.tasks)
-			.filter( (task) => task.title.toLowerCase().indexOf(this.q.toLowerCase()) > -1);
-			// .filter( (task) => JSON.stringify(task).toLowerCase().indexOf(this.q.toLowerCase()) > -1)
-	}
-	private assignCopy(){
-		this.filteredTasks = Object.assign([], this.tasks);
-	}
-
-	getTasks(ev: any) {
-		let val = ev.target.value;
-
-		let searchData = this.tasks;
-
-		searchData = searchData.filter( (item) => {
-			return (item.title.toLowerCase().indexOf( val.toLowerCase() ) > -1);
-		});
 	}
 
 	addTask(ev) {
@@ -122,6 +92,22 @@ export class HomePage {
 			});
 	}
 
+	filterTask() {
+		if(this.q){
+			this.assignCopy();
+		}
+
+		this.filteredTasks = Object.assign([], this.tasks)
+			.filter( (task) => task.title.toLowerCase().indexOf(this.q.toLowerCase()) > -1);
+			// .filter( (task) => JSON.stringify(task).toLowerCase().indexOf(this.q.toLowerCase()) > -1)
+
+		this.currentPage = 1;
+	}
+
+	private assignCopy(){
+		this.filteredTasks = Object.assign([], this.tasks);
+	}
+
 	numberOfPages() {
 		if (this.pageSize != 0) {
 			return Math.ceil(this.filteredTasks.length / this.pageSize);
@@ -130,10 +116,11 @@ export class HomePage {
 		}
 	}
 
-	previous() {
+	previousPage() {
 		this.currentPage = this.currentPage - 1;
 	}
-	next() {
+
+	nextPage() {
 		this.currentPage = this.currentPage + 1;
 	}
 

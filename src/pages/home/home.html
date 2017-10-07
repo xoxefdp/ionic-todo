@@ -5,15 +5,18 @@
 				<h2>Task List</h2>
 			</ion-title>
 		</ion-item>
+
 		<ion-list inset>
 			<ion-item>
-				<ion-icon name="search"></ion-icon>
-				<ion-input type="text" [(ngModel)]="q" (keyup)="filterTask($event)" placeholder="Search..."></ion-input>
+				<ion-label>Search:</ion-label>
+				<ion-input type="text" [(ngModel)]="q" (keyup)="filterTask($event)" placeholder="type text..."></ion-input>
 			</ion-item>
 			<ion-item>
-				<ion-input type="text" [(ngModel)]="title" (keydown)="addTask($event)" placeholder="Add Task..."></ion-input>
+				<ion-label>Add Task:</ion-label>
+				<ion-input type="text" [(ngModel)]="title" (keydown)="addTask($event)" placeholder="type text..."></ion-input>
 			</ion-item>
 		</ion-list>
+
 	</ion-navbar>
 </ion-header>
 
@@ -28,22 +31,31 @@
 		</ion-item>
 	</ion-list>
 
-	<ion-grid>
-		<ion-row>
-			<ion-col col-8>
-				<button ion-button (click)="previous()" [disabled]="currentPage == 1">
-					<ion-icon name="arrow-back"></ion-icon>
-				</button>
-				<button ion-button disabled>
-					{{currentPage}}/{{numberOfPages()}}
-				</button>
-				<button ion-button (click)="next()" [disabled]="currentPage >= numberOfPages()">
-					<ion-icon name="arrow-forward"></ion-icon>
-				</button>
-			</ion-col>
-			<ion-col col-4>
-				<ion-input type="number" [(ngModel)]="pageSize" placeholder="Rows per page..."></ion-input>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
 </ion-content>
+
+<ion-footer>
+	<ion-list inset>
+		<ion-item>
+			<ion-label>Rows per page:</ion-label>
+			<ion-input type="number" [(ngModel)]="pageSize" placeholder="type number..."></ion-input>
+		</ion-item>
+	</ion-list>
+
+	<ion-row>
+		<ion-col col-4>
+			<button ion-button full (click)="previousPage()" [disabled]="currentPage == 1">
+				<ion-icon name="arrow-back"></ion-icon>
+			</button>
+		</ion-col>
+		<ion-col col-4>
+			<button ion-button full disabled>
+				{{currentPage}}/{{numberOfPages()}}
+			</button>
+		</ion-col>
+		<ion-col col-4>
+			<button ion-button full (click)="nextPage()" [disabled]="currentPage >= numberOfPages()">
+				<ion-icon name="arrow-forward"></ion-icon>
+			</button>
+		</ion-col>
+	</ion-row>
+</ion-footer>
