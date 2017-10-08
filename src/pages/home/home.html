@@ -2,7 +2,7 @@
 	<ion-navbar>
 		<ion-item>
 			<ion-title>
-				<h2>Task List</h2>
+				<h2>Ionic Task List</h2>
 			</ion-title>
 		</ion-item>
 
@@ -20,17 +20,16 @@
 	</ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="filteredTasks?.length != 0">
 	<ion-list inset>
 		<ion-item *ngFor="let task of filteredTasks | slice: (currentPage * pageSize) - pageSize : currentPage * pageSize">
 			<ion-label>{{task.title}}</ion-label>
-			<ion-checkbox color="blue" [(ngModel)]="task.isDone" (click)="updateStatus(task)"></ion-checkbox>
+			<ion-checkbox color="blue" [(ngModel)]="task.isDone" (click)="updateTask(task)"></ion-checkbox>
 			<button ion-button item-end color="danger" (click)="deleteTask(task._id)">
 				<ion-icon name="trash"></ion-icon>
 			</button>
 		</ion-item>
 	</ion-list>
-
 </ion-content>
 
 <ion-footer>

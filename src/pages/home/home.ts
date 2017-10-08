@@ -9,6 +9,7 @@ import { TaskService } from '../../services/task.service';
 	templateUrl: 'home.html',
 	providers: [TaskService]
 })
+
 export class HomePage {
 
 	tasks: Task[];
@@ -21,7 +22,7 @@ export class HomePage {
 	constructor(public navCtrl: NavController, private taskService: TaskService) {
 		this.tasks = [];
 		this.filteredTasks = [];
-		this.pageSize = 5;
+		this.pageSize = 3;
 		this.q = '';
 
 		if( this.tasks == null || this.tasks.length == 0 ) {
@@ -73,14 +74,14 @@ export class HomePage {
 			});
 	}
 
-	updateStatus(task) {
+	updateTask(task) {
 		const updTask = {
 			_id: task._id,
 			title: task.title,
 			isDone: task.isDone
 		};
 
-		this.taskService.updateStatus(updTask)
+		this.taskService.updateTask(updTask)
 			.subscribe(data => {
 				if (data.n === 1) {
 					for (let i = 0; i < this.tasks.length; i++) {

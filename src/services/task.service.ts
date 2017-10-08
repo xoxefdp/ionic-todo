@@ -16,7 +16,7 @@ export class TaskService {
     .map(res => res.json());
   }
 
-	getTask(id) {
+	getTask(id: number) {
     return this.http.get(
       this.endpoint + '/task/' + id)
     .map(res => res.json());
@@ -32,13 +32,13 @@ export class TaskService {
     .map(res => res.json());
   }
 
-  deleteTask(id) {
+  deleteTask(id: number) {
     return this.http.delete(
       this.endpoint + '/task/' + id)
     .map(res => res.json());
   }
 
-	updateStatus(task) {
+	updateTask(task) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.put(
@@ -47,5 +47,4 @@ export class TaskService {
       {headers: headers})
     .map(res => res.json());
   }
-
 }
